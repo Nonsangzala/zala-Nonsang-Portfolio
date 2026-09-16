@@ -1,0 +1,491 @@
+/* ============================================
+   HERO SECTION - STYLES
+   ============================================ */
+
+/* Root Variables */
+:root {
+    --primary-color: #2563EB;
+    --bg-white: #FFFFFF;
+    --text-dark: #1F2937;
+    --text-gray: #6B7280;
+    --border-light: #E5E7EB;
+    --transition-speed: 0.3s;
+    --border-radius: 10px;
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    background-color: #FFFFFF !important;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFFFF !important;
+    color: var(--text-dark) !important;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    animation: fadeIn 0.8s ease-in-out;
+    background: radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 22%),
+                radial-gradient(circle at 10% 20%, rgba(96,165,250,0.18), transparent 18%),
+                linear-gradient(180deg, #031227 0%, #07102a 100%);
+    color: #E5F2FF;
+}
+
+/* Hero Container - Grid Layout */
+.hero__container {
+    display: grid;
+    grid-template-columns: minmax(320px, 1.05fr) minmax(320px, 0.95fr);
+    gap: var(--spacing-xl);
+    align-items: center;
+    justify-items: start;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* ============================================
+   HERO CONTENT (LEFT SIDE)
+   ============================================ */
+
+.hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+
+/* Badge Styling */
+.hero__badge {
+    display: inline-block;
+    width: fit-content;
+}
+
+.badge__text {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    background-color: #F0F4FF;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+}
+
+/* Main Title */
+.hero__title {
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+/* Subtitle with Highlight */
+.hero__subtitle {
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.3;
+}
+
+.highlight {
+    color: #7DD3FC;
+    font-weight: 700;
+}
+
+/* Description Text */
+.hero__title {
+    color: #F8FAFF;
+}
+
+.hero__subtitle {
+    color: rgba(248, 250, 255, 0.92);
+}
+
+.hero__description {
+    font-size: clamp(16px, 2vw, 18px);
+    color: rgba(226, 238, 255, 0.78);
+    line-height: 1.8;
+    max-width: 500px;
+    margin-top: var(--spacing-sm);
+    font-weight: 400;
+}
+
+.badge__text {
+    color: rgba(226, 238, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(125, 211, 252, 0.55);
+}
+
+.btn--secondary {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #F8FAFF;
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.btn--secondary:hover {
+    border-color: #7DD3FC;
+    color: #7DD3FC;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.hero__buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-md);
+}
+
+/* Button Base Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 14px 32px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    white-space: nowrap;
+}
+
+/* Primary Button */
+.btn--primary {
+    background-color: var(--primary-color);
+    color: var(--bg-white);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn--primary:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn--primary:active {
+    transform: scale(0.98);
+}
+
+/* Secondary Button */
+.btn--secondary {
+     color:#111827 !important;
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    border: 2px solid var(--border-light);
+}
+
+.btn--secondary:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+}
+
+.btn--secondary:active {
+    transform: scale(0.98);
+}
+
+/* Icon Styling in Buttons */
+.btn i {
+    font-size: 18px;
+    transition: transform var(--transition-speed) ease;
+}
+
+.btn--primary:hover i {
+    transform: translateY(-2px);
+}
+
+.btn--secondary:hover i {
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   HERO IMAGE (RIGHT SIDE)
+   ============================================ */
+
+.hero__image {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    animation: slideInRight 0.8s ease-out 0.4s both;
+    gap: var(--spacing-sm);
+    justify-self: end;
+}
+
+.hero__image-frame {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(12, 30, 70, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.hero__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+    min-height: 520px;
+}
+
+.hero__image-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.22), transparent 18%),
+                radial-gradient(circle at 20% 80%, rgba(96, 165, 250, 0.16), transparent 22%);
+}
+
+.hero__image-note {
+    font-size: 13px;
+    color: rgba(226, 238, 255, 0.78);
+    text-align: right;
+    max-width: 440px;
+}
+
+.hero__image-note code {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide In Left Animation */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In Right Animation */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .hero__container {
+        gap: var(--spacing-lg);
+    }
+
+    .hero__title {
+        font-size: clamp(40px, 6vw, 56px);
+    }
+
+    .hero__subtitle {
+        font-size: clamp(18px, 3vw, 24px);
+    }
+
+    .hero__description {
+        font-size: 16px;
+    }
+
+    .hero__image-frame {
+        max-width: 360px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .hero__container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .hero__content {
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+
+    .hero__badge {
+        justify-content: center;
+    }
+
+    .hero__title {
+        font-size: clamp(32px, 7vw, 48px);
+    }
+
+    .hero__subtitle {
+        font-size: clamp(16px, 4vw, 22px);
+    }
+
+    .hero__description {
+        font-size: 15px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero__buttons {
+        justify-content: center;
+        gap: var(--spacing-md);
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    .image__placeholder {
+        max-width: 250px;
+    }
+
+    .image__placeholder i {
+        font-size: 90px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - SMALL MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+    .hero {
+        padding: var(--spacing-md);
+    }
+
+    .hero__container {
+        gap: var(--spacing-lg);
+    }
+
+    .hero__content {
+        gap: var(--spacing-md);
+    }
+
+    .hero__title {
+        font-size: 32px;
+    }
+
+    .hero__subtitle {
+        font-size: 18px;
+    }
+
+    .hero__description {
+        font-size: 14px;
+    }
+
+    .badge__text {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+
+    .hero__buttons {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .image__placeholder {
+        max-width: 200px;
+        aspect-ratio: 1;
+    }
+
+    .image__placeholder i {
+        font-size: 70px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Focus Styles for Keyboard Navigation */
+.btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
