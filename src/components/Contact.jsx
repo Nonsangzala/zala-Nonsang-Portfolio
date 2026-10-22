@@ -40,7 +40,7 @@ const contactDetails = [
   }
 ]
 
-const defaultStatus = 'Your message will be sent securely to my inbox.'
+const defaultStatus = 'Your inquiry will be saved securely.'
 
 export default function Contact() {
   const [status, setStatus] = React.useState({ type: 'default', message: defaultStatus })
@@ -84,26 +84,33 @@ export default function Contact() {
       return
     }
 
+    const API_URL = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, '')
+    if (!API_URL) {
+      setStatus({ type: 'error', message: 'Contact service is not configured. Please try again later.' })
+      return
+    }
+
     setIsSubmitting(true)
     setStatus({ type: 'default', message: 'Sending your inquiry…' })
 
-    const apiUrl = import.meta.env.VITE_API_URL || 'https://portfolio-contact-backend-wjr4.onrender.com'
-
     try {
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)
       })
 
-      const result = await response.json()
-      if (!response.ok) throw new Error(result.message || 'Unable to send inquiry')
+      let result
+      try { result = await response.json() } catch { result = null }
+      if (!response.ok || result?.success !== true || result?.persisted !== true) {
+        throw new Error(result?.message || 'Your inquiry could not be confirmed. Please try again later.')
+      }
 
       setStatus({ type: 'success', message: 'Your inquiry has been sent successfully.' })
       form.reset()
       Object.keys(validations).forEach((field) => setFieldState(field, true))
     } catch (error) {
-      setStatus({ type: 'error', message: error instanceof Error ? error.message : 'Unable to send your inquiry right now. Please try again later.' })
+      setStatus({ type: 'error', message: error instanceof TypeError ? 'Unable to reach the contact service. Please check your connection and try again.' : error instanceof Error ? error.message : 'Unable to send your inquiry right now. Please try again later.' })
     } finally {
       setIsSubmitting(false)
     }

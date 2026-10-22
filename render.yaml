@@ -12,6 +12,8 @@ services:
       - key: NODE_ENV
         value: production
       - key: CLIENT_URL
+        value: https://zala-nonsang-portfolio-ibwazbhcg-zala-nonsang-portfolio.vercel.app
+      - key: DATABASE_URL
         sync: false
       - key: SMTP_HOST
         value: smtp.gmail.com

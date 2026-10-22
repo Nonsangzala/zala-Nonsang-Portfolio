@@ -1,6 +1,6 @@
 # Portfolio Contact Backend
 
-This service receives the portfolio contact form and sends each inquiry to the configured Gmail inbox through Gmail SMTP and Nodemailer. The visitor email is used only as `Reply-To`; SMTP credentials always belong to the portfolio owner's Gmail account.
+This service validates and permanently stores each inquiry in PostgreSQL. Email delivery is a separate optional notification through Gmail SMTP; a submission remains successful if it was saved but notification email is unavailable.
 
 ## Structure
 
@@ -28,6 +28,7 @@ Use `npm start` in production. Copy `.env.example` to `.env` and set the values 
 ```env
 PORT=5000
 CLIENT_URL=http://localhost:5173
+DATABASE_URL=postgresql://user:password@host:5432/database
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-gmail@gmail.com
@@ -40,12 +41,12 @@ Never commit `.env`. `MAIL_FROM` must be the authenticated Gmail account. Create
 
 ## API testing
 
-Health check: `GET http://localhost:5000/api/health`
+Health check: [(https://portfolio-contact-backend-wjr4.onrender.com)]
 
 Contact request:
 
 ```bash
-curl -X POST http://localhost:5000/api/contact \
+https://portfolio-contact-backend-wjr4.onrender.com
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","email":"john@example.com","subject":"Website Project","message":"I need a website for my business."}'
 ```
@@ -54,7 +55,7 @@ The API trims and validates every field, limits lengths, rate-limits submissions
 
 ## Connect the existing React form
 
-Add `VITE_API_URL=http://localhost:5000` to the frontend `.env`, then use this request in the existing submit handler:
+Add[ https://portfolio-contact-backend-wjr4.onrender.com]https://portfolio-contact-backend-wjr4.onrender.com to the frontend `.env`, then use this request in the existing submit handler:
 
 ```js
 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
@@ -76,7 +77,9 @@ Create a Node web service with `backend` as its root directory, or configure the
 Render build command: `npm install`  
 Render start command: `npm start`
 
-Add these dashboard environment variables: `PORT`, `CLIENT_URL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`, and `MAIL_TO`. Use `smtp.gmail.com`, `587`, your Gmail address, and a Google App Password. Render and Railway provide `PORT`; the app falls back to 5000 locally.
+Create a hosted PostgreSQL database and set its private connection string as `DATABASE_URL` in Render. The service creates the `contact_inquiries` table at startup. Set `CLIENT_URL` to the exact Vercel origin. SMTP settings are optional; if enabled, configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`, and `MAIL_TO`. Email does not replace database storage.
+
+Render health check `/api/health` returns HTTP 503 when PostgreSQL is unavailable. Contact requests return success only after the insert completes. Never put database or mail secrets in frontend variables.
 
 ## Common errors
 
